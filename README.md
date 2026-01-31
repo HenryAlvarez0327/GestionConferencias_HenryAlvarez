@@ -22,7 +22,7 @@ Este proyecto permite gestionar:
 - Visual Studio
 ## Autor
 Henry Álvarez
-Evidencia
+## Evidencia
 <img width="1916" height="966" alt="image" src="https://github.com/user-attachments/assets/34c4ace5-bc60-48ec-8531-d1ceebac1952" />
 <img width="1919" height="893" alt="image" src="https://github.com/user-attachments/assets/d2223cfb-1cb2-414c-93ad-1b3d9d113976" />
 <img width="1301" height="521" alt="image" src="https://github.com/user-attachments/assets/276bc44d-ad9b-43b1-b3b1-baeb504f6400" />
