@@ -1,4 +1,4 @@
-# GestionConferencias
+# Gestion de Conferencias
 Sistema de Gestión de Conferencias desarrollado en **.NET**, para administrar conferencias y asistentes, incluyendo el registro de información.
 ## Descripción
 Este proyecto permite gestionar:
