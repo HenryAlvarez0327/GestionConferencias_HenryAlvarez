@@ -1,0 +1,104 @@
+﻿@model GestionConferencias.Models.Asistente
+
+@{
+    ViewData["Title"] = "Editar Asistente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Editar Asistente</h2>
+        <small class="text-muted">Actualiza la información del asistente</small>
+    </div>
+
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form asp-action="Edit" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="AsistenteId" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input asp-for="Nombre"
+                       class="form-control"
+                       autocomplete="given-name" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <small class="text-muted">Solo letras (sin números).</small>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Apellido" class="form-label"></label>
+                <input asp-for="Apellido"
+                       class="form-control"
+                       autocomplete="family-name" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+                <small class="text-muted">Solo letras (sin números).</small>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       autocomplete="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefono" class="form-label"></label>
+                <input asp-for="Telefono"
+                       class="form-control"
+                       maxlength="10"
+                       inputmode="numeric"
+                       placeholder="Ej: 0987654321"
+                       autocomplete="tel" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+                <small class="text-muted">Debe tener exactamente 10 dígitos.</small>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // 1) Teléfono: solo números y máximo 10
+        const tel = document.querySelector('input[name="Telefono"]');
+        if (tel) {
+            tel.addEventListener("input", function () {
+                this.value = this.value.replace(/\D/g, '').slice(0, 10);
+            });
+        }
+
+        // 2) Nombre y Apellido: solo letras (incluye tildes y ñ) + espacios
+        const soloLetras = (input) => {
+            input.addEventListener("input", function () {
+                this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+            });
+        };
+
+        const nombre = document.querySelector('input[name="Nombre"]');
+        const apellido = document.querySelector('input[name="Apellido"]');
+
+        if (nombre) soloLetras(nombre);
+        if (apellido) soloLetras(apellido);
+
+    });
+</script>

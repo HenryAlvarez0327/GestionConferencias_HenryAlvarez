@@ -1,0 +1,94 @@
+﻿@model GestionConferencias.Models.Asistente
+
+@{
+    ViewData["Title"] = "Detalle del Asistente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Detalle del Asistente</h2>
+        <small class="text-muted">Información registrada del asistente</small>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Volver
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model.AsistenteId" class="btn btn-warning">
+            Editar
+        </a>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <div class="fw-semibold">
+            Asistente #@Model.AsistenteId
+        </div>
+        <span class="badge bg-secondary">Detalle</span>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Nombre</small>
+                    <div class="fw-semibold fs-5">@Model.Nombre</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Apellido</small>
+                    <div class="fw-semibold fs-5">@Model.Apellido</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Email</small>
+                    <div class="fw-semibold">
+                        <a class="text-decoration-none" href="mailto:@Model.Email">@Model.Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Teléfono</small>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Telefono))
+                    {
+                        <div class="fw-semibold">
+                            <a class="text-decoration-none" href="tel:@Model.Telefono">@Model.Telefono</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">No registrado</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+
+        <div class="d-flex justify-content-between align-items-center">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                Volver al listado
+            </a>
+
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.AsistenteId" class="btn btn-warning">
+                    Editar
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.AsistenteId" class="btn btn-danger">
+                    Eliminar
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

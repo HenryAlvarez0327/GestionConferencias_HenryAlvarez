@@ -1,0 +1,33 @@
+﻿@model GestionConferencias.Models.Conferencia
+
+@{
+    ViewData["Title"] = "Eliminar Conferencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger">Eliminar Conferencia</h2>
+<p class="text-muted">Esta acción no se puede deshacer</p>
+
+<div class="alert alert-danger">
+    ¿Desea eliminar esta conferencia?
+</div>
+
+<div class="card shadow-sm border-danger">
+    <div class="card-body">
+
+        <strong>@Model.Nombre</strong><br />
+        @Model.Fecha<br />
+        @Model.Ubicacion<br />
+        @Model.Descripcion
+
+        <hr />
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="ConferenciaId" />
+
+            <button class="btn btn-danger">Sí, eliminar</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        </form>
+
+    </div>
+</div>

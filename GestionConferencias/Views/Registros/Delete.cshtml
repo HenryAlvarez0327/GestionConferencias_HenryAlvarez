@@ -1,0 +1,110 @@
+﻿@model GestionConferencias.Models.Registro
+
+@{
+    ViewData["Title"] = "Eliminar Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0 text-danger">Eliminar Registro</h2>
+        <small class="text-muted">Quitar inscripción (NO elimina al asistente)</small>
+    </div>
+
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm px-4 shadow-sm">
+        Volver
+    </a>
+</div>
+
+<div class="alert alert-danger d-flex align-items-center shadow-sm" role="alert">
+    <div class="me-2 fs-4">⚠️</div>
+    <div>
+        <strong>¿Estás seguro?</strong> Se eliminará la inscripción del asistente en la conferencia.
+        Esta acción no se puede deshacer.
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <div class="fw-semibold">Registro #@Model.RegistroId</div>
+        <span class="badge bg-light text-danger">Eliminar</span>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row g-3">
+
+            
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <small class="text-muted d-block">Fecha de registro</small>
+                    <div class="fw-semibold">
+                        @(Model.FechaRegistro?.ToString("dd/MM/yyyy HH:mm") ?? "—")
+                    </div>
+                </div>
+            </div>
+
+         
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light">
+                    <small class="text-muted d-block">Asistente</small>
+
+                    @if (Model.Asistente != null)
+                    {
+                        <div class="fw-semibold">
+                            @Model.Asistente.Nombre @Model.Asistente.Apellido
+                        </div>
+                        <div>
+                            <a href="mailto:@Model.Asistente.Email">@Model.Asistente.Email</a>
+                        </div>
+                        <div class="text-muted">
+                            Tel: @(string.IsNullOrWhiteSpace(Model.Asistente.Telefono) ? "—" : Model.Asistente.Telefono)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-muted">—</div>
+                    }
+                </div>
+            </div>
+
+       
+            <div class="col-md-12">
+                <div class="p-3 border rounded bg-light">
+                    <small class="text-muted d-block">Conferencia</small>
+
+                    @if (Model.Conferencia != null)
+                    {
+                        <div class="fw-semibold">@Model.Conferencia.Nombre</div>
+                        <div class="text-muted">
+                            @Model.Conferencia.Fecha.ToString("dd/MM/yyyy HH:mm") | @Model.Conferencia.Ubicacion
+                        </div>
+                        <div class="mt-2">
+                            @Model.Conferencia.Descripcion
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-muted">—</div>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4" />
+
+        <form asp-action="Delete" method="post" class="d-flex justify-content-between align-items-center">
+            <input type="hidden" asp-for="RegistroId" />
+
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-danger px-4 shadow-sm">
+                🗑️ Sí, eliminar
+            </button>
+        </form>
+
+    </div>
+</div>

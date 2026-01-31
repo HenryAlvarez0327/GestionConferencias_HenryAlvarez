@@ -1,0 +1,72 @@
+﻿@model GestionConferencias.Models.Registro
+
+@{
+    ViewData["Title"] = "Editar Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Editar Registro</h2>
+        <small class="text-muted">Actualizar inscripción (la fecha no cambia)</small>
+    </div>
+
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm px-4 shadow-sm">
+        Volver
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+           
+            <input type="hidden" asp-for="RegistroId" />
+
+            <input type="hidden" asp-for="FechaRegistro" />
+
+
+            <div class="mb-3">
+                <label asp-for="ConferenciaId" class="form-label fw-semibold">Conferencia</label>
+                <select asp-for="ConferenciaId"
+                        class="form-select"
+                        asp-items="ViewBag.ConferenciaId">
+                </select>
+                <span asp-validation-for="ConferenciaId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="AsistenteId" class="form-label fw-semibold">Asistente</label>
+                <select asp-for="AsistenteId"
+                        class="form-select"
+                        asp-items="ViewBag.AsistenteId">
+                </select>
+                <span asp-validation-for="AsistenteId" class="text-danger"></span>
+            </div>
+            <div class="alert alert-light border mb-3">
+                <small class="text-muted">
+                    <strong>Fecha de registro:</strong>
+                    @(Model.FechaRegistro?.ToString("dd/MM/yyyy HH:mm") ?? "—")
+                </small>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Guardar cambios
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

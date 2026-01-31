@@ -1,0 +1,92 @@
+﻿@model GestionConferencias.Models.Asistente
+
+@{
+    ViewData["Title"] = "Eliminar Asistente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0 text-danger">Eliminar Asistente</h2>
+        <small class="text-muted">Confirma si deseas eliminar este registro</small>
+    </div>
+
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        Volver
+    </a>
+</div>
+
+<div class="alert alert-danger d-flex align-items-center shadow-sm" role="alert">
+    <div class="me-2 fs-4">⚠️</div>
+    <div>
+        <strong>¿Estás seguro?</strong> Esta acción no se puede deshacer.
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <div class="fw-semibold">
+            Asistente #@Model.AsistenteId
+        </div>
+        <span class="badge bg-light text-danger">Eliminar</span>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Nombre</small>
+                    <div class="fw-semibold fs-5">@Model.Nombre</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Apellido</small>
+                    <div class="fw-semibold fs-5">@Model.Apellido</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Email</small>
+                    <div class="fw-semibold">
+                        <a class="text-decoration-none" href="mailto:@Model.Email">@Model.Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-light h-100">
+                    <small class="text-muted d-block">Teléfono</small>
+                    <div class="fw-semibold">
+                        @if (!string.IsNullOrWhiteSpace(Model.Telefono))
+                        {
+                            <a class="text-decoration-none" href="tel:@Model.Telefono">@Model.Telefono</a>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">No registrado</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+
+        <form asp-action="Delete" method="post" class="d-flex justify-content-between align-items-center">
+            <input type="hidden" asp-for="AsistenteId" />
+
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-danger">
+                🗑️ Sí, eliminar
+            </button>
+        </form>
+
+    </div>
+</div>

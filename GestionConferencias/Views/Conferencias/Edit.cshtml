@@ -1,0 +1,52 @@
+﻿@model GestionConferencias.Models.Conferencia
+
+@{
+    ViewData["Title"] = "Editar Conferencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Editar Conferencia</h2>
+        <small class="text-muted">Actualizar información</small>
+    </div>
+
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="ConferenciaId" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Fecha"></label>
+                <input asp-for="Fecha" type="datetime-local" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Ubicacion"></label>
+                <input asp-for="Ubicacion" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descripcion"></label>
+                <textarea asp-for="Descripcion" class="form-control"></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary">Guardar cambios</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
